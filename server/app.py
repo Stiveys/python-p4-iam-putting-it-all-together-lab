@@ -11,6 +11,8 @@ class Signup(Resource):
     def post(self):
         try:
             data = request.get_json()
+            if 'username' not in data:
+                return {'error': 'Username is required'}, 422
             new_user = User(
                 username=data['username'],
                 image_url=data.get('image_url'),
